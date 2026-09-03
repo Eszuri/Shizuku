@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="?homeCardStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="20dp"
+    android:paddingTop="20dp"
+    android:paddingEnd="20dp"
+    android:paddingBottom="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@android:id/icon"
+            style="@style/CardIcon"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:duplicateParentState="true"
+            android:importantForAccessibility="no"
+            android:padding="10dp"
+            android:src="@drawable/ic_server_error_24dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:duplicateParentState="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@android:id/text1"
+                style="@style/CardTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:duplicateParentState="true"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="17sp"
+                tools:text="Shizuku is running" />
+
+            <TextView
+                android:id="@android:id/text2"
+                style="@style/CardSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:duplicateParentState="true"
+                android:textSize="13sp"
+                tools:text="Running with wireless adb (v13.6)" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

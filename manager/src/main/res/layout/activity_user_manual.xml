@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rikka.widget.borderview.BorderNestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    app:borderBottomVisibility="never"
+    app:borderTopDrawable="@null"
+    app:borderTopVisibility="whenTop">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingTop="?actionBarSize"
+        android:paddingEnd="16dp"
+        android:paddingBottom="24dp"
+        app:fitsSystemWindowsInsets="bottom|top">
+
+        <!-- Subtitle Header -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/user_manual_subtitle"
+            android:textAppearance="?textAppearanceBodyMedium"
+            android:textColor="?android:attr/textColorSecondary" />
+
+        <!-- Quick Action Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_open_dev_options"
+                style="@style/CardButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/manual_btn_open_dev_options"
+                app:icon="@drawable/ic_outline_open_in_new_24" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_open_notification_settings"
+                style="@style/CardButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/manual_btn_open_notification_settings"
+                app:icon="@drawable/ic_outline_notifications_active_24" />
+        </LinearLayout>
+
+        <!-- Step 1 Card -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/FilledCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/manual_sec1_title"
+                    android:textAppearance="?textAppearanceTitleMedium"
+                    android:textColor="?colorPrimary" />
+
+                <TextView
+                    android:id="@+id/text_sec1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:lineSpacingExtra="3sp"
+                    android:textAppearance="?textAppearanceBodyMedium"
+                    tools:text="Content Step 1" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Realme / Oppo / Xiaomi Warning Card -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/FilledCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="?colorErrorContainer">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_outline_info_24"
+                        app:tint="?colorOnErrorContainer" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/manual_alert_oppo_title"
+                        android:textAppearance="?textAppearanceTitleSmall"
+                        android:textColor="?colorOnErrorContainer"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/text_alert_oppo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:lineSpacingExtra="3sp"
+                    android:textAppearance="?textAppearanceBodyMedium"
+                    android:textColor="?colorOnErrorContainer"
+                    tools:text="Warning content" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Step 2 Card (Pairing) -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/FilledCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/manual_sec2_title"
+                    android:textAppearance="?textAppearanceTitleMedium"
+                    android:textColor="?colorPrimary" />
+
+                <TextView
+                    android:id="@+id/text_sec2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:lineSpacingExtra="3sp"
+                    android:textAppearance="?textAppearanceBodyMedium"
+                    tools:text="Content Step 2" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Step 3 Card (Start) -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/FilledCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/manual_sec3_title"
+                    android:textAppearance="?textAppearanceTitleMedium"
+                    android:textColor="?colorPrimary" />
+
+                <TextView
+                    android:id="@+id/text_sec3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:lineSpacingExtra="3sp"
+                    android:textAppearance="?textAppearanceBodyMedium"
+                    tools:text="Content Step 3" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Step 4 Card (Android/data & obb) -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/FilledCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/manual_sec4_title"
+                    android:textAppearance="?textAppearanceTitleMedium"
+                    android:textColor="?colorPrimary" />
+
+                <TextView
+                    android:id="@+id/text_sec4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:lineSpacingExtra="3sp"
+                    android:textAppearance="?textAppearanceBodyMedium"
+                    tools:text="Content Step 4" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Step 5 Card (FAQ / Troubleshooting) -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/FilledCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/manual_sec5_title"
+                    android:textAppearance="?textAppearanceTitleMedium"
+                    android:textColor="?colorPrimary" />
+
+                <TextView
+                    android:id="@+id/text_sec5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:lineSpacingExtra="3sp"
+                    android:textAppearance="?textAppearanceBodyMedium"
+                    tools:text="Content Step 5" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</rikka.widget.borderview.BorderNestedScrollView>

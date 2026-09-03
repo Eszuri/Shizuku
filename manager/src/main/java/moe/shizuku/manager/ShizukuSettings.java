@@ -1,0 +1,124 @@
+package moe.shizuku.manager;
+
+import android.app.ActivityThread;
+import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.SharedPreferences;
+import android.os.Build;
+import android.text.TextUtils;
+
+import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
+
+import java.lang.annotation.Retention;
+import java.util.Locale;
+
+import moe.shizuku.manager.utils.EmptySharedPreferencesImpl;
+import moe.shizuku.manager.utils.EnvironmentUtils;
+
+import static java.lang.annotation.RetentionPolicy.SOURCE;
+
+public class ShizukuSettings {
+
+    public static final String NAME = "settings";
+    public static final String NIGHT_MODE = "night_mode";
+    public static final String LANGUAGE = "language";
+    public static final String KEEP_START_ON_BOOT = "start_on_boot";
+
+    private static SharedPreferences sPreferences;
+
+    public static SharedPreferences getPreferences() {
+        return sPreferences;
+    }
+
+    @NonNull
+    private static Context getSettingsStorageContext(@NonNull Context context) {
+        Context storageContext;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            storageContext = context.createDeviceProtectedStorageContext();
+        } else {
+            storageContext = context;
+        }
+
+        storageContext = new ContextWrapper(storageContext) {
+            @Override
+            public SharedPreferences getSharedPreferences(String name, int mode) {
+                try {
+                    return super.getSharedPreferences(name, mode);
+                } catch (IllegalStateException e) {
+                    // SharedPreferences in credential encrypted storage are not available until after user is unlocked
+                    return new EmptySharedPreferencesImpl();
+                }
+            }
+        };
+
+        return storageContext;
+    }
+
+    public static void initialize(Context context) {
+        if (sPreferences == null) {
+            sPreferences = getSettingsStorageContext(context)
+                    .getSharedPreferences(NAME, Context.MODE_PRIVATE);
+        }
+    }
+
+    @IntDef({
+            LaunchMethod.UNKNOWN,
+            LaunchMethod.ROOT,
+            LaunchMethod.ADB,
+    })
+    @Retention(SOURCE)
+    public @interface LaunchMethod {
+        int UNKNOWN = -1;
+        int ROOT = 0;
+        int ADB = 1;
+    }
+
+    @LaunchMethod
+    public static int getLastLaunchMode() {
+        return getPreferences().getInt("mode", LaunchMethod.UNKNOWN);
+    }
+
+    public static void setLastLaunchMode(@LaunchMethod int method) {
+        getPreferences().edit().putInt("mode", method).apply();
+    }
+
+    @AppCompatDelegate.NightMode
+    public static int getNightMode() {
+        int defValue = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM;
+        if (EnvironmentUtils.isWatch(ActivityThread.currentActivityThread().getApplication())) {
+            defValue = AppCompatDelegate.MODE_NIGHT_YES;
+        }
+        return getPreferences().getInt(NIGHT_MODE, defValue);
+    }
+
+    public static Locale getLocale() {
+        try {
+            SharedPreferences pref = getPreferences();
+            if (pref == null) {
+                return Locale.forLanguageTag("en");
+            }
+            String tag = pref.getString(LANGUAGE, "en");
+            if (TextUtils.isEmpty(tag) || "SYSTEM".equalsIgnoreCase(tag)) {
+                tag = "en";
+            }
+            return Locale.forLanguageTag(tag);
+        } catch (Throwable e) {
+            return Locale.forLanguageTag("en");
+        }
+    }
+
+    public static void setLocale(String language) {
+        try {
+            SharedPreferences pref = getPreferences();
+            if (pref != null) {
+                pref.edit().putString(LANGUAGE, language).commit();
+            }
+        } catch (Throwable ignored) {
+        }
+        Locale locale = Locale.forLanguageTag(language);
+        rikka.material.app.LocaleDelegate.setDefaultLocale(locale);
+        Locale.setDefault(locale);
+    }
+}
